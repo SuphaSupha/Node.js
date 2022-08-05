@@ -360,19 +360,31 @@ const data = JSON.parse(`[{
   }]
   `);
 
+//1
 app.get("/data", (req, res) => {
   res.send(data);
 });
+
 //2
 app.get("/data/:model", (req, res) => {
-  const brandFilter = data.filter((arr) => arr.car === req.params.model);
+  const brandFilter = data.filter(
+    (arr) => arr.car.toLowerCase() === req.params.model.toLowerCase()
+  );
   res.send(brandFilter);
 });
+
 //3
 app.get("/id/:model", (req, res) => {
   const idFilter = data.filter((arr) => arr.id === +req.params.model);
   res.send(idFilter);
+
+  if (!idFilter) {
+    res.status(404).send(`Such id :${req.params.id}, doesnt exist`);
+  } else {
+    res.send(idFilter);
+  }
 });
+
 //4
 app.get("/email", (req, res) => {
   const emails = data.map((arr) => arr.email);
