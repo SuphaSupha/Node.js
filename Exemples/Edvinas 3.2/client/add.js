@@ -2,18 +2,20 @@ const form = document.querySelector("form");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const formInput = document.querySelector("#firstName");
-  const greetings = document.querySelector("#hello");
-  greetings.textContent = `Greetings user: ${formInput.value}`;
-  document.body.prepend(greetings);
+  const nameInput = document.querySelector("#firstName");
+  const surnameInput = document.querySelector("#surName");
 
-  const nameObject = { name: formInput.value };
-  console.log(nameObject);
+  const greating = document.querySelector("h2");
+  greating.textContent = `User: ${nameInput.value} ${surnameInput.value} added`;
+  const nameSurnameObject = {
+    name: nameInput.value,
+    surname: surnameInput.value,
+  };
 
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(nameObject),
+    body: JSON.stringify(nameSurnameObject),
   };
 
   fetch("http://localhost:8080/names", options)
