@@ -1,0 +1,38 @@
+body {
+    background-color: rgba(128, 128, 128, 0.222);
+}
+
+header nav a {
+    text-decoration: none;
+    font-size: 20px;
+    margin: 40px;
+}
+
+.conteiner {
+    width: 95%;
+    height: 100% ;
+    background-color: white;
+    margin: 20px auto;
+}
+
+.cards {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card {
+ height: 300px;
+ width: 30%;
+ border: 1px solid  rgba(128, 128, 128, 0.484);
+ margin-top: 64px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-direction: column;
+}
+
+.card img {
+    height: 124px;
+}
