@@ -6,11 +6,11 @@ const app = express();
 app.use(express.json());
 
 const mysqlConfig = {
-  host: "mysql-do-user-12295529-0.b.db.ondigitalocean.com",
-  user: "doadmin",
-  password: "AVNS_4Vmvt166LbQrA0BGclW",
-  database: "products",
-  port: "25060",
+  host: process.env.MY_SQL_HOST,
+  user: process.env.MY_SQL_USER,
+  password: process.env.MY_SQL_PASSWORD,
+  database: process.env.MY_SQL_DATABASE,
+  port: process.env.MY_SQL_PORT,
 };
 //1
 app.get("/", async (req, res) => {

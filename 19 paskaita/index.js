@@ -9,11 +9,11 @@ app.use(express.json());
 app.use(cors());
 
 const mysqlConfig = {
-  host: "mysql-do-user-12295529-0.b.db.ondigitalocean.com",
-  user: "doadmin",
-  password: "AVNS_4Vmvt166LbQrA0BGclW",
-  database: "ecommerce",
-  port: "25060",
+  host: process.env.MY_SQL_HOST,
+  user: process.env.MY_SQL_USER,
+  password: process.env.MY_SQL_PASSWORD,
+  database: process.env.MY_SQL_DATABASE,
+  port: process.env.MY_SQL_PORT,
 };
 // app.get("/fullorders/:id?", async (req, res) => {
 //   try {

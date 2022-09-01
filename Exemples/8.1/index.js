@@ -10,7 +10,7 @@ app.use(cors());
 
 const port = 3000;
 
-const URI = `mongodb+srv://SuphaSupha:77799213dD@cluster0.ssqyfz8.mongodb.net/?retryWrites=true&w=majority`;
+const URI = `mongodb+srv://SuphaSupha:${process.env.PASSWORD}@cluster0.ssqyfz8.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(URI);
 
