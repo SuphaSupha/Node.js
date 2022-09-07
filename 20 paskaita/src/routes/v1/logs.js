@@ -33,10 +33,10 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const con = await mysql.createConnection(dbconfig);
-    const response = await con.execute(
-      `INSERT INTO logs (pet_id,description,status) values('${req.body.pet_id}','${req.body.description}','${req.body.status}')`
+    const [response] = await con.execute(
+      `INSERT INTO logs (pet_id,description,status) values ('${req.body.pet_id}','${req.body.description}','${req.body.status}')`
     );
-    res.send(response[0]);
+    res.send(response);
     await con.end();
   } catch (e) {
     console.log(e);

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutorials</title>
+    <style>
+      .container {
+        background-color: grey;
+        width: 30%;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+    <script>
+      const renderCard = (tutorial) => {
+        const { user_id, title, content } = tutorial;
+        const useridEl = document.createElement("p");
+        useridEl.textContent = user_id;
+        const titleEl = document.createElement("h2");
+        titleEl.textContent = title;
+        const contentEl = document.createElement("p");
+        contentEl.textContent = content;
+
+        const card = document.createElement("div");
+
+        card.append(useridEl, titleEl, contentEl);
+        document.querySelector(".container").append(card);
+      };
+
+      const fetchTutorials = () => {
+        fetch("http://localhost:3000/tutorials", {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+          .then((resp) => resp.json())
+          .then((response) => {
+            console.log(response);
+            response.forEach((tutorial) => renderCard(tutorial));
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      };
+      fetchTutorials();
+    </script>
+  </body>
+</html>

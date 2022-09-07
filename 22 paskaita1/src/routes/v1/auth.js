@@ -3,8 +3,9 @@ const express = require('express');
 const Joi = require('joi');
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-const { dbconfig } = require('../../config');
+const { dbconfig, jwtSecret } = require('../../config');
 
 const router = express.Router();
 const userSchema = Joi.object({
@@ -53,7 +54,7 @@ router.post('/login', async (req, res) => {
     await con.end();
 
     if (response.length === 0) {
-      return res.status(400).send({ error: 'incorrect email or password' });
+      res.status(400).send({ error: 'incorrect email or password' });
     }
     const isAuthed = bcrypt.compareSync(
       userData.password,
@@ -61,10 +62,15 @@ router.post('/login', async (req, res) => {
     );
 
     if (isAuthed) {
-      return res.send('ok');
-    }
+      const token = jwt.sign(
+        { id: response[0].id, email: response[0].email },
+        jwtSecret,
+      );
 
-    res.send(response[0]);
+      res.send({ token });
+    } else {
+      res.status(400).send({ error: 'incorrect password' });
+    }
   } catch (e) {
     console.log(e);
     res.status(500).send({ error: 'Server error' });
