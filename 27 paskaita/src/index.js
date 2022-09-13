@@ -9,9 +9,6 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-// // app.use('/v1/content/', content);
-// app.use("/auth/", auth);
-// app.use("/articles/", articles);
 
 app.get("/", async (req, res) => {
   try {

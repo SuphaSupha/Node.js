@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= header %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <body>
+      <div class="container">
+        <% include partials/header %>
+        <div class="bars">
+          <% bars.forEach((bar) => { %>
+          <div class="card">
+            <div class="image">
+              <img src="<%= bar.image_url %>" alt="" />
+            </div>
+            <div class="text">
+              <h2><%= bar.bar_name%></h2>
+              <p class="address"><%= bar.address %></p>
+            </div>
+            <div class="ratings">
+              <p><%= bar.rating %></p>
+              <p><%= bar.price_rating %></p>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </body>
+  </body>
+</html>

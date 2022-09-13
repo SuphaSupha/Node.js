@@ -50,18 +50,20 @@ const { isLoggedIn, isAuth } = require("../mid");
 
 const router = express.Router();
 
-router.post("/", isLoggedIn, async (req, res) => {
+router.post("/", isLoggedIn, async (req, res, next) => {
   try {
-    const con = await mysql.createConnection(dbconfig);
-    const response = await con.execute(
-      `INSERT INTO tutorials (user_id,title,content,private) values ('${req.body.user_id}','${req.body.title}','${req.body.content}','${req.body.private}')`
+    const userId = req.user.id;
+    console.log(userId);
+    const con = await mysql.createConnection(dbConfig);
+    const [data] = await con.execute(
+      `INSERT INTO tutorials (user_id, title, content) VALUES (${mysql.escape(
+        userId
+      )}, ${mysql.escape(req.body.title)}, ${mysql.escape(req.body.content)})`
     );
-    console.log(response[0]);
-    res.send(response[0]);
-
+    res.send(data);
     await con.end();
-  } catch (e) {
-    res.status(400).send({ error: "Error" });
+  } catch (err) {
+    res.status(400).send({ err: "Error" });
   }
 });
 
@@ -78,21 +80,7 @@ router.get("/user-tutorials/:id", isLoggedIn, async (req, res) => {
     res.status(400).send({ error: "Error" });
   }
 });
-router.get("/", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const con = await mysql.createConnection(dbConfig);
-    const [data] = await con.execute(
-      `SELECT * FROM tutorials ${isAuthenticated ? "" : "WHERE private = 0"}`
-    );
 
-    res.send(data);
-
-    await con.end();
-  } catch (err) {
-    res.status(400).send({ err: "Error" });
-  }
-});
 router.post("/", isLoggedIn, async (req, res, next) => {
   try {
     const userId = req.user.id;
@@ -115,23 +103,35 @@ router.post("/", isLoggedIn, async (req, res, next) => {
   }
 });
 
-// router.get("/", async (req, res) => {
+// router.get("/", async (req, res, next) => {
 //   try {
-//     const token = req.headers.authorization?.split(" ")[1] || "";
-//     console.log(token);
-//     const user = jwt.verify(token, jwtSecret);
-//     console.log(user);
-//     if (user) {
-//       const con = await mysql.createConnection(dbconfig);
-//       const [response] = await con.execute(`SELECT * FROM tutorials`);
-//       await con.end();
-//       res.send(response);
-//     } else {
-//       console.log("Not connected");
-//     }
-//   } catch (e) {
-//     res.status(400).send({ error: "Error" });
+//     const isAuthenticated = await isAuth(req);
+//     const con = await mysql.createConnection(dbConfig);
+//     const [data] = await con.execute(
+//       `SELECT * FROM tutorials ${isAuthenticated ? "" : "WHERE private = 0"}`
+//     );
+//     res.send(data);
+//     await con.end();
+//   } catch (err) {
+//     res.status(400).send({ err: "Error" });
 //   }
 // });
+
+router.get("/", async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1] || "";
+    const user = jwt.verify(token, jwtSecret);
+    if (user) {
+      const con = await mysql.createConnection(dbconfig);
+      const [response] = await con.execute(`SELECT * FROM tutorials`);
+      await con.end();
+      res.send(response);
+    } else {
+      console.log("Not connected");
+    }
+  } catch (e) {
+    res.status(400).send({ error: "Error" });
+  }
+});
 
 module.exports = router;
