@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+
+}
+img {
+  width: 250px;
+  height: 160px;
+}
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  background-color: rgba(245, 222, 179, 0.266);
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.header h2 {
+  font-size: 28px;
+}
+
+.bars {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.ratings {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+.card {
+  background-color: white;
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border:1px solid rgba(128, 128, 128, 0.308);
+}
+.fa-star,
+.fa-dollar-sign {
+  font-size: 14px;
+}
+.fa-star {
+    color: #23c8bb;
+  }
+  .red {
+    color: #f93e59;
+  }
+  
+  .grey {
+    color: #c0c1c3;
+  }

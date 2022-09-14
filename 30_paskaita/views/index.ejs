@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= header %></title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+     <% include partials/header %>
   </head>
   <body>
     <body>
+      <h1 class="header">Most Popular Bars</h1>
       <div class="container">
-        <% include partials/header %>
+       
         <div class="bars">
           <% bars.forEach((bar) => { %>
           <div class="card">
@@ -19,13 +20,30 @@
               <p class="address"><%= bar.address %></p>
             </div>
             <div class="ratings">
-              <p><%= bar.rating %></p>
-              <p><%= bar.price_rating %></p>
+              <div class="stars">
+                <% for (let j = 0; j < bar.rating; j++) { %>
+                <i class="fa-solid fa-star"></i>
+                <% } %>
+                <!-- / -->
+                <% for (let k = 0; k < 5 - bar.rating; k++) { %>
+                <i class="fa-regular fa-star"></i>
+                <% } %>
+              </div>
+              <!-- // price review  -->
+              <div class="price">
+                <% for (let j = 0; j < bar.price_rating; j++) { %>
+                <i class="fa-solid fa-dollar-sign red"></i>
+                <% } %>
+                <!-- / -->
+                <% for (let k = 0; k < 5 - bar.price_rating; k++) { %>
+                <i class="fa-regular fa-dollar-sign grey"></i>
+                <% } %>
+              </div>
             </div>
           </div>
           <% }) %>
         </div>
       </div>
     </body>
-  </body>
-</html>
+    <% include partials/script %>
+ </html>

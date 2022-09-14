@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -5,12 +6,13 @@ body {
 
 a {
   color: #00B7FF;
-
 }
+
 img {
   width: 250px;
   height: 160px;
 }
+
 .container {
   width: 1200px;
   margin: 0 auto;
@@ -19,8 +21,12 @@ img {
 }
 
 .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .header h2 {
@@ -28,23 +34,34 @@ img {
 }
 
 .bars {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .ratings {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .card {
   background-color: white;
   border-radius: 6px;
   padding: 12px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  border:1px solid rgba(128, 128, 128, 0.308);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border: 1px solid rgba(128, 128, 128, 0.308);
 }
-
+/*# sourceMappingURL=style.css.map */

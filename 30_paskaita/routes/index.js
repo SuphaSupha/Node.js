@@ -8,9 +8,13 @@ const { dbconfig } = require("../config/config");
 router.get("/", async (req, res) => {
   try {
     const con = await mysql.createConnection(dbconfig);
-    const [response] = await con.execute("SELECT * FROM bars");
+    const response = await con.execute("SELECT * FROM bars");
     await con.end();
-    res.render("index", { header: "Most popular bars", bars: response });
+    res.render("index", {
+      page: "Home",
+      menuId: "home",
+      bars: response[0],
+    });
   } catch (e) {
     console.error(e);
   }
