@@ -14,8 +14,9 @@ app.get("/", async (req, res) => {
   try {
     const randomUsers = await fetch("https://randomuser.me/api/");
     const randomUsersResponse = await randomUsers.json();
-    const firstName = randomUsersResponse.results[0].name.first;
-
+    const firstName = await randomUsersResponse.results[0].gender;
+    const gender = await randomUsersResponse.result[0].name.first;
+    console.log(gender);
     const con = await mysql.createConnection(dbconfig);
     await con.execute(
       `INSERT INTO names (name) VALUES (${mysql.escape(firstName)})`
